@@ -19,10 +19,6 @@
 import { computed } from 'vue'
 import { useCountStore } from '~/store/count'
 
-definePageMeta({
-  layout: 'default',
-})
-
 // data
 const countStore = useCountStore()
 
@@ -37,16 +33,7 @@ const onClickIncrement = () => {
   countStore.increment()
 }
 
-// const data = ref({
-//   phone: '6282208427599',
-//   password: 'password',
-//   latlong: '',
-//   device_token: '',
-//   device_type: 2,
-// })
-
-// const submit = async () => {
-//   const res = await axios.post(`/api-web/oauth/sign_in`, data.value)
-//   console.log('INI', res)
-// }
+definePageMeta({
+  layout: 'default',
+})
 </script>
