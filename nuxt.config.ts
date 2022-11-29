@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     'vuetify/lib/styles/main.sass',
     '@mdi/font/css/materialdesignicons.min.css',
   ],
-  modules: ['@nuxtjs-alt/proxy'],
+  modules: ['@nuxtjs-alt/proxy', '@pinia/nuxt'],
   proxy: {
     enableProxy: true,
     proxies: {
