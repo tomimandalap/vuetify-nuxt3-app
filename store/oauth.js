@@ -1,10 +1,12 @@
 import axios from 'axios'
+import cookie from 'cookie'
 import { defineStore } from 'pinia'
 
 export const useOauthStore = defineStore({
   id: 'oauth',
   state: () => {
     return {
+      access_token: null,
       loading: false,
       error_message: [],
     }
@@ -12,10 +14,14 @@ export const useOauthStore = defineStore({
   getters: {},
   actions: {
     signin(payload) {
+      console.log('IKI', payload)
       return axios
         .post(`/api-web/oauth/sign_in`, payload)
         .then((res) => {
-          return res.data
+          const token = res.data.data.user.access_token
+          document.cookie = cookie.serialize('access_token', token)
+          this.access_token = token
+          return token
         })
         .catch((err) => {
           console.error('Error', err.response)
