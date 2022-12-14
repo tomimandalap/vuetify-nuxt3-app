@@ -14,7 +14,6 @@ export const useOauthStore = defineStore({
   getters: {},
   actions: {
     signin(payload) {
-      console.log('IKI', payload)
       return axios
         .post(`/api-web/oauth/sign_in`, payload)
         .then((res) => {
@@ -30,6 +29,10 @@ export const useOauthStore = defineStore({
         .finally(() => {
           this.loading = false
         })
+    },
+    signout() {
+      document.cookie = cookie.serialize('access_token', null)
+      return true
     },
   },
 })

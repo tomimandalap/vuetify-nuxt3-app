@@ -5,7 +5,7 @@
       <v-app-bar-title>Dashboard</v-app-bar-title>
 
       <template v-slot:append>
-        <v-btn @click="$router.push('/')">Home</v-btn>
+        <v-btn @click="handleLogout">Logout</v-btn>
 
         <v-btn
           :prepend-icon="
@@ -32,11 +32,13 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-
+import { useOauthStore } from '~/store/oauth'
 useHead({
   titleTemplate: 'Admin | %s',
 })
 
+const router = useRouter()
+const oauthStore = useOauthStore()
 const theme = ref('dark')
 const drawer = ref(null)
 
@@ -46,5 +48,10 @@ const handleDrawer = () => {
 
 const onClick = () => {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
+}
+
+const handleLogout = () => {
+  const res = oauthStore.signout()
+  if (res) router.push('/')
 }
 </script>
